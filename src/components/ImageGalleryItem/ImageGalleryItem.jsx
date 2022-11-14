@@ -10,9 +10,9 @@ export const ImageGalleryItem = ({
   return (
     <li
       className="gallery-item"
-      onClick={() => {
-        onClick({ largeImageURL, imageTitle });
-      }}
+      onClick={() => 
+        onClick({ largeImageURL, imageTitle })
+      }
     >
       <Img src={imageURL} alt={imageTitle} />
     </li>
@@ -24,3 +24,5 @@ ImageGalleryItem.propTypes = {
   imageTitle: PropTypes.string.isRequired,
   largeImageURL: PropTypes.string.isRequired,
 };
+
+

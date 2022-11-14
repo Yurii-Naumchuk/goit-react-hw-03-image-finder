@@ -7,9 +7,11 @@ export class App extends Component {
   state = {
     searchImages: '',
   };
+
   handleSubmitForm = searchImages => {
     this.setState({ searchImages });
   };
+  
   render() {
     return (
       <div>

@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { toast } from 'react-toastify';
 import { ImageList } from 'components/shared/ImageList/ImageList';
 import { Loader } from 'components/shared/Loader/Loader';
-import fetchRequest from 'components/services/FetchApi';
+import fetchRequest from 'services/FetchApi';
 import Modal from 'components/shared/Modal/Modal';
 import { Div, LoadMode } from './imageGallery.styled';
 
@@ -19,6 +19,7 @@ export default class ImageGallery extends Component {
       title: '',
     },
   };
+
   componentDidUpdate(prevProps, prevState) {
     const { page } = this.state;
     const { searchImages } = this.props;
@@ -32,6 +33,7 @@ export default class ImageGallery extends Component {
       return;
     }
   }
+
   async fetchImages(currentName, currentPage) {
     this.setState({ loading: true });
     try {
@@ -69,6 +71,7 @@ export default class ImageGallery extends Component {
       };
     });
   };
+
   openModal = modalContent => {
     this.setState({
       modalOpen: true,
@@ -85,19 +88,19 @@ export default class ImageGallery extends Component {
       },
     });
   };
+
   render() {
-    const { loading, images, modalOpen, error } = this.state;
-    const isImages = Boolean(images.length);
-    const { loadMore, closeModal, openModal } = this;
+    const { loading, images, modalOpen, error, modalContent } = this.state;
+    const isImages = images.length;
     return (
       <div>
         {error && <p>Try later.</p>}
         <Div> {loading && <Loader />}</Div>
 
-        {isImages && <ImageList items={images} onClick={openModal} />}
-        {isImages && <LoadMode onClick={loadMore}>loadMore</LoadMode>}
+        {isImages && <ImageList items={images} onClick={this.openModal} />}
+        {isImages && <LoadMode onClick={this.loadMore}>loadMore</LoadMode>}
         {modalOpen && (
-          <Modal onClose={closeModal} contents={this.state.modalContent} />
+          <Modal onClose={this.closeModal} contents={modalContent} />
         )}
       </div>
     );

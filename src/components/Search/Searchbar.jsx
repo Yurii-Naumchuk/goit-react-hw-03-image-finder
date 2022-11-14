@@ -13,6 +13,7 @@ export default class Searchbar extends Component {
       [name]: value,
     });
   };
+  
   handleSubmit = e => {
     e.preventDefault();
     if (this.state.searchImages.trim() === '') {
