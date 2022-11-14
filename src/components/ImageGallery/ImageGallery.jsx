@@ -20,6 +20,7 @@ export default class ImageGallery extends Component {
     },
   };
 
+  
   componentDidUpdate(prevProps, prevState) {
     const { page } = this.state;
     const { searchImages } = this.props;
@@ -28,8 +29,8 @@ export default class ImageGallery extends Component {
       return;
     }
     if (prevProps.searchImages !== searchImages && page === prevState.page) {
-      this.fetchImages(searchImages, 1);
       this.setState({ page: 1 });
+      this.fetchImages(searchImages, 1);
       return;
     }
   }
